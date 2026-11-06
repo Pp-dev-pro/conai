@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Predict | ConcreteAI</title><meta name="description" content="Enter concrete mix parameters and get the predicted compressive strength in MPa."><link rel="stylesheet" href="style.css"></head><body>
+<section class="sub"><div class="stripe"></div><p class="tag">LIVE PREDICTOR</p><h1>Mix <span>parameters</span></h1><p class="lead">Enter kg per m³ for each material and the age in days. Values go to the Catalyst QuickML endpoint through a secure Java function.</p></section>
+<main>
+<section id="predict" class="panel">
+  <div class="split">
+    <form id="form" novalidate>
+      <div class="presets"><span>Quick presets:</span><button type="button" data-p="demo">Demo mix</button><button type="button" data-p="m25">Normal</button><button type="button" data-p="dam">Dam / mass</button><button type="button" data-p="clear" class="ghost">Clear</button></div>
+      <div class="fields" id="fields"></div><div class="live" id="live"></div>
+      <button class="go" id="go" type="submit"><span>PREDICT STRENGTH</span><em></em></button><p class="err" id="err" role="alert"></p>
+    </form>
+    <aside class="result" aria-live="polite">
+      <div class="ring"><svg viewBox="0 0 200 200"><circle class="bg" cx="100" cy="100" r="86"/><circle class="fg" id="arc" cx="100" cy="100" r="86"/></svg><div class="val"><b id="out">--</b><span>MPa</span></div></div>
+      <div class="badge" id="grade">Awaiting input</div>
+      <ul class="kv" id="kv"><li><span>Likely range (± RMSE 4.96)</span><b id="band">--</b></li><li><span>Concrete grade reached</span><b id="gr">--</b></li><li><span>Water / cementitious ratio</span><b id="wcm">--</b></li><li><span>Fresh density (kg/m³)</span><b id="den">--</b></li><li><span>Cement saved vs 400 kg/m³</span><b id="sav">--</b></li></ul>
+      <p class="note" id="note">Estimate only. Confirm with standard cube tests.</p>
+    </aside>
+  </div>
+  <div class="hist"><h3>Prediction history <button id="clr" class="ghost">Clear</button></h3><div class="tw"><table id="ht"><thead><tr><th>#</th><th>Cement</th><th>Slag</th><th>Fly ash</th><th>Water</th><th>SP</th><th>Age</th><th>MPa</th></tr></thead><tbody></tbody></table></div></div>
+</section>
+<section class="panel"><h2><i>02</i> How to read the result</h2>
+<div class="cards"><article><b>1</b><h4>Know the target</h4><p>IS 10262 target mean strength = fck + 1.65 × s.</p></article><article><b>2</b><h4>Allow for error</h4><p>RMSE is about 5 MPa, so read a band, not a single number.</p></article><article><b>3</b><h4>Decide</h4><p>Clearly above target: cast cubes. Borderline: adjust and re-predict. Below: do not use.</p></article><article><b>4</b><h4>Confirm</h4><p>Use the app to narrow choices and the laboratory to confirm.</p></article></div>
+<div class="tw"><table><thead><tr><th>Grade</th><th>fck (MPa)</th><th>s (MPa)</th><th>Target mean strength</th></tr></thead><tbody><tr><td>M25</td><td>25</td><td>4.0</td><td>25 + 1.65 × 4.0 = 31.6</td></tr><tr><td>M30</td><td>30</td><td>5.0</td><td>30 + 1.65 × 5.0 = 38.3</td></tr><tr><td>M35</td><td>35</td><td>5.0</td><td>35 + 1.65 × 5.0 = 43.3</td></tr><tr><td>M40</td><td>40</td><td>5.0</td><td>40 + 1.65 × 5.0 = 48.3</td></tr></tbody></table></div>
+<p class="warn">Example: the app returned 40.37 MPa for the demo mix. At 28 days that clears M30 (38.3) but not M35 (43.3), and the honest reading is a band of about 35 to 45 MPa.</p></section>
+</main><script src="common.js"></script><script src="predict.js"></script></body></html>

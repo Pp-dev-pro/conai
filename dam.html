@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dam Case Study | ConcreteAI</title><meta name="description" content="Our dam model, worked calculations, procedure, limits and conclusion for ConcreteAI."><link rel="stylesheet" href="style.css"></head><body>
+<section class="sub"><div class="stripe"></div><p class="tag">CASE STUDY</p><h1>Dam <span>structures</span></h1><p class="lead">Dams use huge volumes of concrete, so a small saving or a small mistake is multiplied by hundreds of thousands of cubic metres. This is an illustrative scenario, not the design of any particular dam.</p></section>
+<main>
+<section class="panel"><h2><i>01</i> Why dam concrete is different</h2><div class="cards">
+<article><b>1</b><h4>Mass concrete</h4><p>Thick blocks make heat, so cement is kept low and fly ash or slag replaces part of it.</p></article>
+<article><b>2</b><h4>Long design ages</h4><p>Often 90 days or later, as pozzolanic materials gain strength slowly.</p></article>
+<article><b>3</b><h4>Large volumes</h4><p>Many mixes are compared and many batches are produced daily.</p></article>
+<article><b>4</b><h4>Severe consequences</h4><p>The structure must perform for decades.</p></article></div>
+<div class="tw"><table><thead><tr><th>Need on a dam project</th><th>How ConcreteAI helps</th></tr></thead><tbody><tr><td>Choose between mixes</td><td>Predict each trial mix in seconds and shortlist before lab work</td></tr><tr><td>Limit heat with slag or fly ash</td><td>Change slag and fly ash and see the strength effect at once</td></tr><tr><td>Strength at different ages</td><td>Enter 1 to 365 days and compare</td></tr><tr><td>Quick field checks</td><td>Android app at the batching plant or pour</td></tr><tr><td>Share with design office</td><td>Website and API on a computer</td></tr></tbody></table></div></section>
+
+<section class="panel"><h2><i>02</i> Our dam model</h2>
+<p>A small-scale <b>working model of a dam</b> was built for this project. It is a demonstration, not an engineering design, but it shows the main parts a real dam needs, each built from concrete in real life.</p>
+<figure class="fig dk"><img src="images/dam1.jpg" alt="Front view of the dam model" loading="lazy"><figcaption>Figure 19.1: Front view: lit top deck with vehicles, spillway bays, water and green side slopes</figcaption></figure>
+<figure class="fig dk"><img src="images/dam2.jpg" alt="Low-angle view of the dam model" loading="lazy"><figcaption>Figure 19.2: Low-angle view: sloping banks, dark piers and openings, water channel</figcaption></figure>
+<div class="tw"><table><thead><tr><th>Part in the model</th><th>Real dam element</th><th>Use of the app</th></tr></thead><tbody>
+<tr><td>Top deck with railings</td><td>Service road or bridge deck</td><td>Check deck mixes for strength and durability under traffic</td></tr>
+<tr><td>Piers between openings</td><td>Spillway piers, gate supports</td><td>Screen higher-strength mixes for gate loads</td></tr>
+<tr><td>Openings (bays)</td><td>Spillway bays, gate slots</td><td>Compare mixes for surfaces with fast-flowing water</td></tr>
+<tr><td>Dam body between banks</td><td>Main body, cast in lifts</td><td>Low-cement mixes with fly ash or slag; strength at 90 days+</td></tr>
+<tr><td>Side slopes</td><td>Abutments, training walls</td><td>Compare mixes for walls and slope protection</td></tr></tbody></table></div></section>
+
+<section class="panel"><h2><i>03</i> Sample calculation 1: choosing a mix</h2>
+<p class="small">Predicted strengths here came from a Random Forest and ExtraTrees ensemble trained on the same 1030-sample dataset.</p>
+<div class="tw"><table><thead><tr><th>Input (kg/m³)</th><th>Mix A</th><th>Mix B</th><th>Mix C</th></tr></thead><tbody><tr><td>Cement</td><td>300</td><td>250</td><td>200</td></tr><tr><td>Blast furnace slag</td><td>0</td><td>0</td><td>100</td></tr><tr><td>Fly ash</td><td>0</td><td>100</td><td>80</td></tr><tr><td>Water</td><td>180</td><td>175</td><td>170</td></tr><tr><td>Superplasticizer</td><td>0</td><td>5</td><td>6</td></tr><tr><td>Coarse aggregate</td><td>1000</td><td>1000</td><td>1000</td></tr><tr><td>Fine aggregate</td><td>780</td><td>760</td><td>770</td></tr><tr><td><b>Total mass</b></td><td>2260</td><td>2290</td><td>2326</td></tr><tr><td><b>w/cm</b></td><td>180/300 = 0.60</td><td>175/350 = 0.50</td><td>170/380 = 0.45</td></tr></tbody></table></div>
+<p class="eq">w/cm = water / (cement + slag + fly ash) &nbsp;|&nbsp; Target (M25, s = 4.0) = 25 + 1.65 × 4.0 = 31.6 MPa &nbsp;|&nbsp; accept if predicted − 4.96 ≥ 31.6</p>
+<div class="tw"><table><thead><tr><th>Mix</th><th>28 days</th><th>90 days</th><th>90 d − 4.96</th><th>Result</th></tr></thead><tbody><tr><td>A</td><td>28.5</td><td>36.9</td><td>31.9</td><td class="pass">Passes by only 0.3 MPa; most cement</td></tr><tr><td>B</td><td>34.1</td><td>43.1</td><td>38.1</td><td class="pass">Passes with margin</td></tr><tr><td>C</td><td>39.4</td><td>49.3</td><td>44.3</td><td class="pass">Large margin; least cement</td></tr></tbody></table></div>
+<p class="warn">Decision: Mix A is rejected as borderline. B and C go to the laboratory. The 90/28-day ratios are 1.29, 1.26 and 1.25, showing the later-age gain dam designers rely on.</p></section>
+
+<section class="panel"><h2><i>04</i> Sample calculation 2: cement saving</h2>
+<div class="tw"><table><thead><tr><th>Per lift (10 × 10 × 3 m = 300 m³)</th><th>Mix A</th><th>Mix C</th><th>Saving</th></tr></thead><tbody><tr><td>Cement per m³</td><td>300 kg</td><td>200 kg</td><td>100 kg</td></tr><tr><td>Cement per lift</td><td>90 t</td><td>60 t</td><td>30 t (33%)</td></tr><tr><td>Whole dam (50,000 m³)</td><td>15,000 t</td><td>10,000 t</td><td><b>5,000 t</b></td></tr></tbody></table></div>
+<p>Mix C's 90-day prediction is 49.3 MPa; minus the 4.96 MPa error gives 44.3 MPa, 12.7 MPa above the 31.6 MPa target. That margin suggests a leaner mix could be tried next. Real savings also depend on slag and fly ash prices and transport.</p></section>
+
+<section class="panel"><h2><i>05</i> Procedure, limits &amp; conclusion</h2>
+<ul class="chk"><li><b>1. Collect:</b> list each candidate mix in kg/m³.</li><li><b>2. Check:</b> add the masses and compute w/cm.</li><li><b>3. Predict:</b> run each mix at 28, 90 and 180 days.</li><li><b>4. Compare:</b> subtract about 5 MPa error and compare with the target mean strength.</li><li><b>5. Confirm:</b> send only the best mixes for cube tests.</li></ul>
+<h3 style="color:var(--y)">Limitations</h3><ul class="chk"><li>The dataset is from 2007 and covers laboratory mixes; dam concrete uses larger aggregate and thick lifts.</li><li>Temperature rise and cracking in mass concrete are not predicted.</li><li>Errors average about 5 MPa; mixes outside the training ranges are unreliable.</li><li>The app is a screening tool, not a design or safety certificate.</li></ul>
+<h3 style="color:var(--y)">Future scope</h3><ul class="chk"><li>Train on recent and local Indian concrete data.</li><li>Compare deep learning models with Deep Forest.</li><li>Add cloud sync for prediction history.</li><li>Add a mix optimiser that suggests proportions for a target grade.</li></ul>
+<p class="warn"><b>Conclusion:</b> ConcreteAI brings strength prediction to the construction site. The Android app gives an estimate in seconds, the Catalyst website serves any browser, and laboratory testing remains the final proof.</p>
+<h3 style="color:var(--y)">References</h3><p class="small">[1] UCI Machine Learning Repository, Concrete Compressive Strength (ID 165), I-Cheng Yeh. [2] Zhang et al., Deepforest-based concrete strength prediction, Scientific Reports 14, 18918 (2024). [3] I.-C. Yeh, Cement and Concrete Research 28(12), 1998. [4] Zhou and Feng, Deep Forest, 2017. [5] IS 456:2000 and IS 10262:2019, Bureau of Indian Standards.</p></section>
+</main><script src="common.js"></script></body></html>

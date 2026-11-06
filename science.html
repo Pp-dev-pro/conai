@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model and Data | ConcreteAI</title><meta name="description" content="Deep Forest model, UCI dataset, charts, app architecture, cloud website and API."><link rel="stylesheet" href="style.css"></head><body>
+<section class="sub"><div class="stripe"></div><p class="tag">DEEP FOREST · UCI DATASET 165</p><h1>Model, data <span>&amp; architecture</span></h1><p class="lead">How the app is built, what the machine learning model is, and what the 1030-sample dataset tells us.</p></section>
+<main>
+<section class="panel"><h2><i>01</i> How the app is built</h2>
+<p>ConcreteAI is a native Android app written in <b>Java</b>, so it is fast and works without internet. It is the first concrete strength prediction project built natively in Java for Android; the earlier published model was Python desktop software.</p>
+<figure class="fig"><img src="images/layers.jpg" alt="App layers" loading="lazy"><figcaption>Figure 12.1: Layers of the ConcreteAI app</figcaption></figure>
+<figure class="fig"><img src="images/flow-app.jpg" alt="Prediction flow" loading="lazy"><figcaption>Figure 12.2: What happens when the user taps Predict Strength</figcaption></figure>
+<ul class="chk"><li><b>Reading inputs:</b> collects the eight values from the cards.</li><li><b>Validation:</b> empty or impossible values are caught first.</li><li><b>Feature array:</b> values arranged in the exact training order.</li><li><b>Prediction:</b> the tree-based model calculates strength.</li><li><b>Display:</b> result ring plus analytics.</li></ul>
+<p class="small">Because the model sits inside the app, no data leaves the phone and no server is needed.</p></section>
+
+<section class="panel"><h2><i>02</i> The machine learning model</h2>
+<div class="row"><div><p>The engine is a <b>Deep Forest</b> combining Random Forest and ExtraTrees regressors. Deep Forest (Zhou and Feng, 2017) stacks layers of tree ensembles instead of neural layers, which suits small tabular datasets. The design follows Zhang et al., <i>Scientific Reports</i> 14, 18918 (2024), which compared twelve regression models with grid search and fivefold cross-validation.</p><br><p><b>Data split (about 8:2):</b> Training 822 samples, Testing 208 samples. Test samples are never seen in training.</p></div>
+<figure class="fig"><img src="images/donut.jpg" alt="1030 samples split" loading="lazy"></figure></div>
+<figure class="fig"><img src="images/fig-rmse.jpg" alt="Deep Forest vs Random Forest" loading="lazy"><figcaption>Figure 13.1: Deep Forest vs Random Forest on the test set (Zhang et al., 2024)</figcaption></figure>
+<figure class="fig"><img src="images/fig-within.jpg" alt="Prediction accuracy bands" loading="lazy"><figcaption>Figure 13.2: How close test predictions were to the true strength</figcaption></figure>
+<p>Deep Forest scored the best R² of 0.91, all tree models exceeded 0.90, and LASSO was lowest at 0.61. On the app's analytics screen: MAE 3.397, RMSE 4.958, R² 0.907.</p></section>
+
+<section class="panel"><h2><i>03</i> The dataset</h2>
+<p>Trained on the <b>Concrete Compressive Strength</b> dataset from the UCI Machine Learning Repository (ID 165), created by Prof. I-Cheng Yeh: <b>1030 laboratory samples</b>, eight inputs, one output, no missing values.</p>
+<div class="tw"><table><thead><tr><th>Variable</th><th>Unit</th><th>Min</th><th>Mean</th><th>Max</th><th>Role</th></tr></thead><tbody>
+<tr><td>Cement</td><td>kg/m³</td><td>102.0</td><td>281.2</td><td>540.0</td><td>Input</td></tr><tr><td>Blast furnace slag</td><td>kg/m³</td><td>0.0</td><td>73.9</td><td>359.4</td><td>Input</td></tr><tr><td>Fly ash</td><td>kg/m³</td><td>0.0</td><td>54.2</td><td>200.1</td><td>Input</td></tr><tr><td>Water</td><td>kg/m³</td><td>121.8</td><td>181.6</td><td>247.0</td><td>Input</td></tr><tr><td>Superplasticizer</td><td>kg/m³</td><td>0.0</td><td>6.2</td><td>32.2</td><td>Input</td></tr><tr><td>Coarse aggregate</td><td>kg/m³</td><td>801.0</td><td>972.9</td><td>1145.0</td><td>Input</td></tr><tr><td>Fine aggregate</td><td>kg/m³</td><td>594.0</td><td>773.6</td><td>992.6</td><td>Input</td></tr><tr><td>Age</td><td>days</td><td>1</td><td>45.7</td><td>365</td><td>Input</td></tr><tr><td>Compressive strength</td><td>MPa</td><td>2.3</td><td>35.8</td><td>82.6</td><td><b>Output</b></td></tr></tbody></table></div>
+<figure class="fig"><img src="images/fig-hist.jpg" alt="Strength distribution" loading="lazy"><figcaption>Figure 14.1: Distribution of compressive strength (mean 35.8 MPa)</figcaption></figure>
+<p class="warn">The dataset dates from 2007 and covers laboratory mixes. Modern admixtures, very high-strength concretes and unusual aggregates are not represented, so predictions should be confirmed by testing. Source: archive.ics.uci.edu/dataset/165/concrete+compressive+strength</p></section>
+
+<section class="panel"><h2><i>04</i> What the data tells us</h2>
+<figure class="fig"><img src="images/fig-corr.jpg" alt="Correlation chart" loading="lazy"><figcaption>Figure 15.1: Correlation of each input with compressive strength</figcaption></figure>
+<p><b>Cement and superplasticizer</b> relate positively to strength; <b>water</b> has the strongest negative relation (−0.29).</p>
+<figure class="fig"><img src="images/fig-age.jpg" alt="Strength vs age" loading="lazy"><figcaption>Figure 15.2: Strength against age (line: median at 3, 7, 14, 28 days)</figcaption></figure>
+<p><b>Age matters most.</b> Age alone gave the best single-factor R² of 0.39 and a five-factor subset reached 0.83. Strength climbs steeply in the first 28 days, then flattens.</p>
+<figure class="fig"><img src="images/fig-gain.jpg" alt="Early age strength gain" loading="lazy"><figcaption>Figure 24.1: Early-age strength as % of the 28-day median (47%, 64%, 79%, 100%)</figcaption></figure></section>
+
+<section class="panel"><h2><i>05</i> Catalyst cloud website &amp; API</h2>
+<figure class="fig"><img src="images/flow-web.jpg" alt="Website flow" loading="lazy"><figcaption>Figure 16.1: How the website gets a prediction from the cloud API</figcaption></figure>
+<p>The site sends the eight values over HTTPS to a Java function on Catalyst. The function adds the secret key and OAuth token and calls the QuickML endpoint, so no secret ever reaches the browser.</p>
+<div class="row"><div><p class="tag2">REQUEST</p><pre class="code">POST /server/concrete_proxy/predict
+{
+  "data": {
+    "Cement (component 1)(kg in a m^3 mixture)": 151,
+    "Blast Furnace Slag (component 2)(kg in a m^3 mixture)": 0,
+    "Fly Ash (component 3)(kg in a m^3 mixture)": 184,
+    "Water  (component 4)(kg in a m^3 mixture)": 167,
+    "Superplasticizer (component 5)(kg in a m^3 mixture)": 12,
+    "Coarse Aggregate  (component 6)(kg in a m^3 mixture)": 991,
+    "Fine Aggregate (component 7)(kg in a m^3 mixture)": 772,
+    "Age (day)": 28
+  }
+}</pre></div><div><div class="tw"><table><thead><tr><th>Feature</th><th>Android app</th><th>Website</th></tr></thead><tbody><tr><td>Internet</td><td>Not needed</td><td>Required</td></tr><tr><td>Install</td><td>Android phone</td><td>None, any browser</td></tr><tr><td>Best for</td><td>Site work</td><td>Office, teams</td></tr><tr><td>Updates</td><td>App update</td><td>Once on server</td></tr><tr><td>Other software</td><td>No</td><td>Via API</td></tr></tbody></table></div></div></div></section>
+</main><script src="common.js"></script></body></html>

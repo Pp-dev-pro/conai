@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home | ConcreteAI</title><meta name="description" content="ConcreteAI predicts concrete compressive strength from mix proportions using machine learning."><link rel="stylesheet" href="style.css"></head><body>
+<section class="hero"><div class="stripe"></div>
+<p class="tag">CIVIL ENGINEERING × MACHINE LEARNING</p>
+<h1>Know your concrete's strength <span>before it cures.</span></h1>
+<p class="lead">ConcreteAI predicts compressive strength in seconds from the mix and age. It is an Android app plus a Catalyst cloud website, built on a Deep Forest model trained with 1030 laboratory mixes.</p>
+<div class="btns"><a class="btn" href="predict.html">Try the predictor</a><a class="btn o" href="app.html">See the Android app</a></div>
+<div class="stats"><div><b data-n="1030">0</b><span>Training mixes</span></div><div><b data-n="0.907" data-d="3">0</b><span>R² score</span></div><div><b data-n="3.397" data-d="3">0</b><span>MAE (MPa)</span></div><div><b data-n="8">0</b><span>Input factors</span></div></div></section>
+<main>
+<section class="panel"><div class="row"><div><h2><i>01</i> About the project</h2>
+<p>Concrete is the world's most used construction material, and its <b>compressive strength</b> tells an engineer whether a beam, slab or dam block is safe. Normally this number arrives only after cubes are cured for 7 or 28 days and crushed. Until then decisions are made on experience.</p><br>
+<p>ConcreteAI gives an early, reasonably reliable estimate from seven ingredients (kg per m³) and the age in days. It is a <b>screening tool</b>: standard cube tests remain the proof of strength.</p>
+<ul class="chk"><li>Build a simple Android app that predicts strength on site</li><li>Cut waiting time, trial mixes, material and testing cost</li><li>Offer the same service as a cloud website for laptops</li><li>Show through a dam case study how it supports real decisions</li></ul></div>
+<div style="text-align:center"><img class="icon" src="images/app-icon.jpg" alt="ConcreteAI app icon"><p class="small" style="margin-top:10px">ConcreteAI app icon</p></div></div></section>
+
+<section class="panel"><h2><i>02</i> The real-life problem</h2>
+<div class="tw"><table><thead><tr><th>Point</th><th>Traditional testing</th><th>ConcreteAI (app and website)</th></tr></thead><tbody>
+<tr><td>Time</td><td>Mixing, curing and compression tests take days to weeks</td><td>Estimated in seconds from the mix inputs</td></tr>
+<tr><td>Cost</td><td>Repeated trial batches and lab equipment</td><td>Fewer trial mixes, less material and testing spend</td></tr>
+<tr><td>Accuracy</td><td>Rebound hammer and ultrasonic checks are less precise</td><td>Deep Forest R² about 0.91 (app screen: 0.907)</td></tr>
+<tr><td>Dependence</td><td>Needs a specialized lab and trained technicians</td><td>Runs on any Android phone or browser</td></tr>
+<tr><td>Availability</td><td>Only when the lab is open and cubes are ready</td><td>Always available (app works offline)</td></tr></tbody></table></div>
+<p class="warn">ConcreteAI gives an estimate. It supports decisions but does not replace cube tests and code requirements.</p></section>
+
+<section class="panel"><h2><i>03</i> Who uses it</h2><div class="cards">
+<article><b>1</b><h4>Site engineer</h4><p>Enters batch quantities and age for an instant strength estimate before the next activity.</p></article>
+<article><b>2</b><h4>Ready-mix plant</h4><p>Checks which proportion is likely to meet the target before running trial batches.</p></article>
+<article><b>3</b><h4>Contractor</h4><p>Tries fly ash or slag replacement levels and sees the effect on strength at once.</p></article>
+<article><b>4</b><h4>Quality inspector</h4><p>Cross-checks a contractor's mix before asking for further tests.</p></article>
+<article><b>5</b><h4>Student</h4><p>Changes one input at a time to learn how water and age affect strength.</p></article>
+<article><b>6</b><h4>Dam teams</h4><p>Screens mass-concrete mixes for strength at 28 to 365 days.</p></article></div></section>
+
+<section class="panel"><h2><i>04</i> Explore the project</h2><div class="cards">
+<article><h4>Predict</h4><p>Live predictor connected to the Catalyst QuickML API.</p><div class="btns"><a class="btn o" href="predict.html">Open</a></div></article>
+<article><h4>Android App</h4><p>Screens, 8-step guide and input reference.</p><div class="btns"><a class="btn o" href="app.html">Open</a></div></article>
+<article><h4>Model &amp; Data</h4><p>Deep Forest, UCI dataset, charts and API.</p><div class="btns"><a class="btn o" href="science.html">Open</a></div></article>
+<article><h4>Dam Case Study</h4><p>Our dam model, worked calculations and limits.</p><div class="btns"><a class="btn o" href="dam.html">Open</a></div></article></div></section>
+
+<section class="panel" id="team"><h2><i>05</i> Project team</h2>
+<p class="small">Minor Project, 5th Semester Diploma in Civil Engineering, Government Polytechnic Sheikhpura (SBTE Patna). Supervisors: Mr. Prabhat Kumar and Mr. Pintu Kumar.</p><div class="team" id="team-list"></div></section>
+</main><script src="common.js"></script></body></html>
